@@ -1,17 +1,36 @@
 {
   "NTIA": {
-    "required_fields": [
-      "componentName",
-      "supplier",
-      "version",
-      "hashes",
-      "license"
-    ]
+    "required_fields": ["componentName", "supplier", "version", "purl", "hashes", "license"],
+    "mappings": {
+      "spdx": {
+        "componentName": "name",
+        "supplier": "supplier",
+        "version": "versionInfo",
+        "purl": "packageDownloadLocation",
+        "hashes": "checksums",
+        "license": "licenseConcluded"
+      },
+      "cyclonedx": {
+        "componentName": "metadata.component.name",
+        "supplier": "metadata.tools[0].vendor",
+        "version": "metadata.component.version",
+        "purl": "metadata.component.purl",
+        "hashes": "components[0].hashes[0].content",
+        "license": "components[0].licenses[0].license.id"
+      }
+    }
   },
   "CRA": {
-    "required_fields": [
-      "vulnerabilityDisclosureURL",
-      "metadata"
-    ]
+    "required_fields": ["vulnerabilityDisclosureURL", "metadata"],
+    "mappings": {
+      "spdx": {
+        "vulnerabilityDisclosureURL": "annotations",
+        "metadata": "creationInfo"
+      },
+      "cyclonedx": {
+        "vulnerabilityDisclosureURL": "metadata.tools[0].name",
+        "metadata": "metadata.timestamp"
+      }
+    }
   }
 }
