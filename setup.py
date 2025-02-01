@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name="ossbomer-conformance",
-    version="1.1.0",
+    version="1.2.0",
     author="Oscar Valenzuela",
     author_email="oscar.valenzuela.b@gmail.com",
-    description="OSSBOMER - SBOM conformance",
+    description="OSSBOMER - SBOM Conformance against NTIA, CRA, and other compliance requirements.",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
