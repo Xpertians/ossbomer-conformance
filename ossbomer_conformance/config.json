@@ -1,0 +1,17 @@
+{
+  "NTIA": {
+    "required_fields": [
+      "componentName",
+      "supplier",
+      "version",
+      "hashes",
+      "license"
+    ]
+  },
+  "CRA": {
+    "required_fields": [
+      "vulnerabilityDisclosureURL",
+      "metadata"
+    ]
+  }
+}
