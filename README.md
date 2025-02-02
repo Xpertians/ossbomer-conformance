@@ -37,6 +37,5 @@ result = validator.validate_sbom("sbom.json")
 print(result)
 ```
 
-
 ### License
 This project is licensed under the MIT License.
