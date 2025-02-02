@@ -1,35 +1,44 @@
 {
   "NTIA": {
-    "required_fields": ["componentName", "supplier", "version", "purl", "hashes", "license"],
+    "required_fields": [
+      "supplier", "componentName", "version", "otherUniqueIdentifiers",
+      "dependencyRelationship", "author", "timestamp"
+    ],
     "mappings": {
-      "spdx": {
-        "componentName": "name",
-        "supplier": "supplier",
-        "version": "versionInfo",
-        "purl": "packageDownloadLocation",
-        "hashes": "checksums",
-        "license": "licenseConcluded"
-      },
       "cyclonedx": {
+        "supplier": "metadata.component.publisher",
+        "alt_supplier": "metadata.tools[0].vendor",
         "componentName": "metadata.component.name",
-        "supplier": "metadata.tools[0].vendor",
         "version": "metadata.component.version",
-        "purl": "metadata.component.purl",
-        "hashes": "components[0].hashes[0].content",
-        "license": "components[0].licenses[0].license.id"
+        "otherUniqueIdentifiers": "metadata.component.purl",
+        "dependencyRelationship": "dependencies",
+        "author": "metadata.tools[0].name",
+        "timestamp": "metadata.timestamp"
       }
     }
   },
   "CRA": {
-    "required_fields": ["vulnerabilityDisclosureURL", "metadata"],
+    "required_fields": [
+      "componentCreator", "componentName", "version", "otherUniqueIdentifiers",
+      "dependencyRelationship", "author", "timestamp", "license",
+      "hashExecutableComponent", "sbomURI", "sourceCodeURI",
+      "uriExecutableComponent", "hashSourceCodeComponent"
+    ],
     "mappings": {
-      "spdx": {
-        "vulnerabilityDisclosureURL": "annotations",
-        "metadata": "creationInfo"
-      },
       "cyclonedx": {
-        "vulnerabilityDisclosureURL": "metadata.tools[0].name",
-        "metadata": "metadata.timestamp"
+        "componentCreator": "metadata.component.publisher",
+        "componentName": "metadata.component.name",
+        "version": "metadata.component.version",
+        "otherUniqueIdentifiers": "metadata.component.purl",
+        "dependencyRelationship": "dependencies",
+        "author": "metadata.tools[0].name",
+        "timestamp": "metadata.timestamp",
+        "license": "metadata.component.licenses[0].license.id",
+        "hashExecutableComponent": "metadata.component.hashes",
+        "sbomURI": "metadata.component.sbomUri",
+        "sourceCodeURI": "metadata.component.sourceUri",
+        "uriExecutableComponent": "metadata.component.uri",
+        "hashSourceCodeComponent": "metadata.component.hashSourceCodeComponent"
       }
     }
   }

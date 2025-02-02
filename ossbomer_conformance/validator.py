@@ -23,10 +23,8 @@ class SBOMConformanceValidator:
         return None  # Unknown format
 
     def get_nested_value(self, data, key_path):
-        """Retrieve nested values from dictionaries & lists safely"""
         keys = key_path.split(".")
         value = data
-        
         for key in keys:
             if "[" in key and "]" in key:
                 key, index = key[:-1].split("[")
@@ -39,12 +37,19 @@ class SBOMConformanceValidator:
             elif isinstance(value, dict) and key in value:
                 value = value[key]
             else:
-                return None  # Key not found
-        
+                return None
+        # Special case for hash extraction
+        if key_path in ["metadata.component.hashes", "metadata.component.hashSourceCodeComponent"]:
+            return self.extract_hash_data(value)
         return value
 
-    def normalize_fields(self, sbom_data, sbom_format, required_fields):
-        """Convert SBOM fields to a common format using the mappings"""
+
+    def extract_hash_data(self, hash_list):
+        if isinstance(hash_list, list):
+            return [{h["alg"]: h["content"]} for h in hash_list if "alg" in h and "content" in h]
+        return None
+
+    def normalize_fieldsese(self, sbom_data, sbom_format, required_fields):
         mappings = self.rules.get("NTIA", {}).get("mappings", {}).get(sbom_format, {})
         normalized_data = {}
         
@@ -52,6 +57,23 @@ class SBOMConformanceValidator:
             mapped_field = mappings.get(required_field, required_field)  # Default to same name if not mapped
             normalized_data[required_field] = self.get_nested_value(sbom_data, mapped_field)
         
+        return normalized_data
+
+    def normalize_fields(self, sbom_data, sbom_format, required_fields):
+        mappings = self.rules.get("CRA", {}).get("mappings", {}).get(sbom_format, {})
+        normalized_data = {}
+
+        for required_field in required_fields:
+            mapped_field = mappings.get(required_field, required_field)
+            value = self.get_nested_value(sbom_data, mapped_field)
+            # Print debug info
+            #print(f"\n[DEBUG] Checking field: {required_field}")
+            #print(f"  - Mapped to: {mapped_field}")
+            #print(f"  - Retrieved value: {value}")
+            normalized_data[required_field] = value
+            normalized_data["supplier"] = self.get_nested_value(sbom_data, "metadata.component.publisher") or \
+                                          self.get_nested_value(sbom_data, "metadata.tools[0].vendor")
+
         return normalized_data
 
     def validate_sbom(self, sbom_file):

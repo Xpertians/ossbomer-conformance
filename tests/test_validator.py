@@ -13,7 +13,7 @@ class TestSBOMConformanceValidator(unittest.TestCase):
             valid_cyclonedx_json = json.load(f)
         result = self.validator.validate_json(valid_cyclonedx_json)
         self.assertEqual(result["NTIA"]["status"], "Pass")
-        self.assertEqual(result["CRA"]["status"], "Fail")
+        self.assertEqual(result["CRA"]["status"], "Pass")
 
     def test_valid_cyclonedx_xml(self):
         sbom_file = "tests/test_sbom.cyclonedx.1.4.xml"

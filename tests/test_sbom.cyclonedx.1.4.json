@@ -23,8 +23,31 @@
             "id": "MIT"
           }
         }
+      ],
+      "publisher": "Example Corp",
+      "sbomUri": "https://example.com/sboms/example-app-2.0.0.cdx.json",
+      "sourceUri": "https://github.com/example/example-app",
+      "uri": "https://example.com/downloads/example-app-2.0.0.tar.gz",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3a7bd3e2360f6b9b1ff643b5b1d67e7aef9dbfcd0b5ad1d3b4f125e9e55a1b6a"
+        }
+      ],
+      "hashSourceCodeComponent": [
+        {
+          "alg": "SHA-256",
+          "content": "abcdef123456789abcdef123456789abcdef123456789abcdef123456789"
+        }
       ]
-    }
+    },
+    "licenses": [
+      {
+        "license": {
+          "id": "MIT"
+        }
+      }
+    ]
   },
   "components": [
     {
@@ -43,6 +66,14 @@
         {
           "alg": "SHA-256",
           "content": "3a7bd3e2360f6b9b1ff643b5b1d67e7aef9dbfcd0b5ad1d3b4f125e9e55a1b6a"
+        }
+      ],
+      "sourceUri": "https://github.com/example/library",
+      "uri": "https://example.com/downloads/example-library-1.2.3.jar",
+      "hashSourceCodeComponent": [
+        {
+          "alg": "SHA-256",
+          "content": "abcdef123456789abcdef123456789abcdef123456789abcdef123456789"
         }
       ]
     }
