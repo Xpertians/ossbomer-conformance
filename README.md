@@ -1,3 +1,8 @@
+# DEPRECATION NOTICE:
+This project has been deprecated in favor of https://github.com/SemClone/ossbomer/
+
+OSSBOMer 2 consolidates ossbomer-schema, ossbomer-conformance and ossbomer-oslc into one profile-driven tool, part of [SEMCL.ONE](https://semcl.one/). Install it with `pip install ossbomer`.
+
 # ossbomer-conformance
 
 **ossbomer-conformance** is a Python library and CLI tool that validates SBOM (Software Bill of Materials) files against NTIA, CRA, and other regulatory conformance rules. It supports **SPDX** and **CycloneDX** formats in JSON and XML.
